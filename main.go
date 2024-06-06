@@ -1,27 +1,12 @@
+/*
+Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+*/
 package main
 
-import (
-	"github.com/TransafeHQ/transafe-sync/internal/sources/db"
-)
+import "github.com/TransafeHQ/transafe-sync/cmd"
+
+// ts db2extract "mydb" --schema=test --table=name
 
 func main() {
-
-	var source = db.OracleSource{
-		Username: "system",
-		Password: "welcome123",
-		Hostname: "localhost",
-		Port:     1521,
-		Sid:      "xe",
-	}
-
-	var config = db.SyncJobConfig{
-		TableName: "FILM",
-		Method:    "FULL_EXTRACT",
-		ShardSize: 10000,
-		Source:    source}
-
-	_, err := db.RunSyncJob(config)
-	if err != nil {
-		panic(err)
-	}
+	cmd.Execute()
 }
