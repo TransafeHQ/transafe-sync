@@ -34,13 +34,41 @@ to quickly create a Cobra application.`,
 			panic(err)
 		}
 
-		var source = db.OracleSource{
-			Username: "system",
-			Password: "welcome123",
-			Hostname: "localhost",
-			Port:     port,
-			Sid:      "xe",
+		username, err := cmd.Flags().GetString("username")
+		if err != nil {
+			panic(err)
 		}
+
+		password, err := cmd.Flags().GetString("password")
+		if err != nil {
+			panic(err)
+		}
+
+		hostname, err := cmd.Flags().GetString("hostname")
+		if err != nil {
+			panic(err)
+		}
+
+		database, err := cmd.Flags().GetString("database")
+		if err != nil {
+			panic(err)
+		}
+
+		var source = db.DB2Source{
+			Username: username,
+			Password: password,
+			Hostname: hostname,
+			Port:     port,
+			Database: database,
+		}
+
+		// var source = db.OracleSource{
+		// 	Username: "system",
+		// 	Password: "welcome123",
+		// 	Hostname: "localhost",
+		// 	Port:     port,
+		// 	Sid:      "xe",
+		// }
 
 		var config = db.SyncJobConfig{
 			TableName: tableName,
@@ -48,7 +76,7 @@ to quickly create a Cobra application.`,
 			ShardSize: 10000,
 			Source:    source}
 
-		_, err := db.RunSyncJob(config)
+		_, err = db.RunSyncJob(config)
 		if err != nil {
 			panic(err)
 		}
