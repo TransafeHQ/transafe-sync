@@ -62,14 +62,6 @@ to quickly create a Cobra application.`,
 			Database: database,
 		}
 
-		// var source = db.OracleSource{
-		// 	Username: "system",
-		// 	Password: "welcome123",
-		// 	Hostname: "localhost",
-		// 	Port:     port,
-		// 	Sid:      "xe",
-		// }
-
 		var config = db.SyncJobConfig{
 			TableName: tableName,
 			Method:    "FULL_EXTRACT",
