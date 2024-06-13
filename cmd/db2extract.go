@@ -91,7 +91,7 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	db2extractCmd.PersistentFlags().String("hostname", "localhost", "A help for foo")
-	db2extractCmd.PersistentFlags().Int32("port", 5932, "A help for foo")
+	db2extractCmd.PersistentFlags().Int("port", 5932, "A help for foo")
 	db2extractCmd.PersistentFlags().String("database", "", "A help for foo")
 
 	db2extractCmd.PersistentFlags().String("username", "", "A help for foo")

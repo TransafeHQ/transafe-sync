@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"log"
 
 	_ "github.com/ibmdb/go_ibm_db"
 )
@@ -19,8 +20,8 @@ type DB2Source struct {
 }
 
 func (s DB2Source) getConnection() (*sql.DB, error) {
-
-	return sql.Open("go_ibm_db", fmt.Sprintf("HOSTNAME=%s;DATABASE=%s;PORT=%s;UID=%s;PWD=%s", s.Hostname, s.Database, s.Port, s.Username, s.Password))
+	log.Println(fmt.Sprintf("HOSTNAME=%s;DATABASE=%s;PORT=%d;UID=%s;PWD=%s;PROTOCOL=TCPIP;", s.Hostname, s.Database, s.Port, s.Username, s.Password))
+	return sql.Open("go_ibm_db", fmt.Sprintf("HOSTNAME=%s;DATABASE=%s;PORT=%d;UID=%s;PWD=%s;PROTOCOL=TCPIP;", s.Hostname, s.Database, s.Port, s.Username, s.Password))
 }
 
 // Function to get table columns from the database
@@ -102,7 +103,7 @@ func (DB2Source) generateExtractQuery(columns []Column, tableName string) (strin
 	buf.WriteString(strings.Join(fields, ","))
 
 	// Add _EXTRACT_DATE column as current timestamp
-	buf.WriteString(",SYS_EXTRACT_UTC(CURRENT_TIMESTAMP) AS SYNC_EXTRACT_DATE ")
+	buf.WriteString(",CURRENT_TIMESTAMP AS SYNC_EXTRACT_DATE ")
 
 	// Add FROM
 	buf.WriteString(fmt.Sprintf("FROM %s", tableName))
