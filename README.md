@@ -1,4 +1,4 @@
-# Transafe Sync
+# Transafe Sync Oracle DB
 
 ## Runtime Requires 
 * Oracle Instant Client Package (Basic or Basic Light) for runtime.
